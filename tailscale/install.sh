@@ -27,10 +27,10 @@ esac
 echo "ifconfig"
 ifconfig
 
-echo "dns"
-host pkgs.tailscale.com
+#echo "dns"
+#host pkgs.tailscale.com
 
-echo "ipv4"
+#echo "ipv4"
 curl -v http://ipv4.tlund.se/ | grep '<title>' || echo "ipv4 failed"
 
 echo "ipv6"
@@ -39,6 +39,7 @@ curl -v http://ipv6.tlund.se/ | grep '<title>' || echo "ipv6 failed"
 echo "dual"
 curl -v http://dual.tlund.se/ | grep '<title>' || echo "dual failed"
 
-wget --prefer-family=IPv4 "https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_${TAILSCALE_ARCH}.tgz" -O - | tar xzf -
+#wget --prefer-family=IPv4 "https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_${TAILSCALE_ARCH}.tgz" -O - | tar xzf -
+curl --ipv4 --resolve pkgs.tailscale.com:443:167.172.11.40 "https://pkgs.tailscale.com/stable/tailscale_${TAILSCALE_VERSION}_${TAILSCALE_ARCH}.tgz" | tar xzf -
 mv "tailscale_${TAILSCALE_VERSION}_${TAILSCALE_ARCH}"/tailscale* /bin
 rm -rf "tailscale_${TAILSCALE_VERSION}_${TAILSCALE_ARCH}"
